@@ -520,14 +520,14 @@ function get_search_template() {
  * 1. {Post Type Template}.php
  * 2. single-{post_type}-{post_name}.php
  * 3. single-{post_type}.php
- * 4. single.php
+ * 4. single-post.php
  *
  * An example of this is:
  *
  * 1. templates/full-width.php
  * 2. single-post-hello-world.php
  * 3. single-post.php
- * 4. single.php
+ * 4. single-post.php
  *
  * The template hierarchy and template path are filterable via the {@see '$type_template_hierarchy'}
  * and {@see '$type_template'} dynamic hooks, where `$type` is 'single'.
@@ -562,7 +562,7 @@ function get_single_template() {
 		$templates[] = "single-{$object->post_type}.php";
 	}
 
-	$templates[] = 'single.php';
+	$templates[] = 'single-post.php';
 
 	return get_query_template( 'single', $templates );
 }

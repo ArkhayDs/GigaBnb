@@ -33,7 +33,7 @@ $wp_file_descriptions = array(
 	'date.php'              => __( 'Date Template' ),
 	// Content.
 	'singular.php'          => __( 'Singular Template' ),
-	'single.php'            => __( 'Single Post' ),
+	'single-post.php'            => __( 'Single Post' ),
 	'page.php'              => __( 'Single Page' ),
 	'front-page.php'        => __( 'Homepage' ),
 	'privacy-policy.php'    => __( 'Privacy Policy Page' ),
