@@ -1,9 +1,10 @@
 <?php get_header()?>
 
+
 <?php if (have_posts()) : ?>
         <?php while (have_posts()) : the_post(); ?>
 
-            <img src="<?php the_post_thumbnail_url();?>" style="...">
+<!--            <img src="--><?php //the_post_thumbnail_url();?><!--" style="...">-->
 
             <div class="card mb-3 bg-light bg-opacity-50 position-absolute top-50 start-50 translate-middle text-center">
                 <div class="card-body">
