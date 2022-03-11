@@ -41,22 +41,39 @@ add_filter('nav_menu_link_attributes', function ($attr) {
 add_action('init', 'shittybnb_register_type_taxonomy');
 function shittybnb_register_type_taxonomy()
 {
-    $labels = [
+    $labels_type = [
         'name' => 'Types de biens',
         'singular_name' => 'Type de bien',
         'search_items' => 'Rechercher un type de bien',
         'all_items' => 'Tous les types de biens'
     ];
 
-    $args = [
-        'labels' => $labels,
+    $args_type = [
+        'labels' => $labels_type,
         'public' => true,
         'hierarchical' => true,
         'show_in_rest' => true,
         'show_admin_column' => true
     ];
 
-    register_taxonomy('type', ['product'], $args);
+    register_taxonomy('type', ['product'], $args_type);
+
+    $labels_modalite = [
+        'name' => 'Modalités de financement',
+        'singular_name' => 'Modalité de financement',
+        'search_items' => 'Rechercher les types de modalités',
+        'all_items' => 'Toutes les modalités de financement'
+    ];
+
+    $args_modalite = [
+        'labels' => $labels_modalite,
+        'public' => true,
+        'hierarchical' => true,
+        'show_in_rest' => true,
+        'show_admin_column' => true
+    ];
+
+    register_taxonomy('modalite', ['product'], $args_modalite);
 }
 
 // add custom post type (cpt) -> use this to manage products
@@ -77,7 +94,7 @@ function shittybnb_register_event_cpt()
         'menu_icon' => 'dashicons-store',
         'supports' => ['title', 'excerpt', 'thumbnail', 'custom-fields'],
         'has_archive' => true,
-        'taxonomies' => ['type']
+        'taxonomies' => ['type','modalite']
     ];
 
     register_post_type('product',$args);
@@ -94,7 +111,38 @@ function wphetic_add_meta_boxes() {
     );
 }
 
-function wphetic_metabox_render() {
+add_action('save_post','wphetic_save_metabox');
+function wphetic_save_metabox($post_id)
+{
+
+    // update price meta
+    if ( !empty($_POST['hcf_price']) ) {
+        update_post_meta($post_id,'product-price',$_POST['hcf_price']);
+    } else {
+        delete_post_meta($post_id,'product-price');
+    }
+
+    // update availability meta
+    if ( !empty($_POST['hcf_date']) ) {
+        update_post_meta($post_id,'product-availability',$_POST['hcf_date']);
+    } else {
+        delete_post_meta($post_id,'product-availability');
+    }
+
+    // update availability meta
+    if ( !empty($_POST['hcf_area']) ) {
+        update_post_meta($post_id,'product-area',$_POST['hcf_area']);
+    } else {
+        delete_post_meta($post_id,'product-area');
+    }
+}
+
+
+function wphetic_metabox_render()
+{
+    $price = get_post_meta($_GET['post'], 'product-price',true);
+    $availability = get_post_meta($_GET['post'],'product-availability',true);
+    $area = get_post_meta($_GET['post'],'product-area',true);
     ?>
     <div class="hcf_box">
         <style scoped>
@@ -111,15 +159,15 @@ function wphetic_metabox_render() {
 
         <p class="meta-options hcf_field">
             <label for="hcf_price">Price</label>
-            <input id="hcf_price" type="number" name="hcf_price">
+            <input id="hcf_price" type="number" name="hcf_price" value="<?= $price; ?>">
         </p>
         <p class="meta-options hcf_field">
             <label for="hcf_date">Available from</label>
-            <input id="hcf_date" type="date" name="hcf_date">
+            <input id="hcf_date" type="date" name="hcf_date" value="<?= $availability; ?>">
         </p>
         <p class="meta-options hcf_field">
             <label for="hcf_area">Surface Area</label>
-            <input id="hcf_area" type="text" name="hcf_area">
+            <input id="hcf_area" type="text" name="hcf_area" value="<?= $area; ?>">
         </p>
     </div>
     <?
