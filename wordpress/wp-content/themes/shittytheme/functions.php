@@ -74,6 +74,23 @@ function shittybnb_register_type_taxonomy()
     ];
 
     register_taxonomy('modalite', ['product'], $args_modalite);
+
+    $labels_localisation = [
+        'name' => 'Localisations des biens',
+        'singular_name' => 'Localisation du bien',
+        'search_items' => 'Rechercher les localisations',
+        'all_items' => 'Toutes les localisations'
+    ];
+
+    $args_localisation = [
+        'labels' => $labels_localisation,
+        'public' => true,
+        'hierarchical' => true,
+        'show_in_rest' => true,
+        'show_admin_column' => true
+    ];
+
+    register_taxonomy('localisation', ['product'], $args_localisation);
 }
 
 // add custom post type (cpt) -> use this to manage products
@@ -135,6 +152,34 @@ function wphetic_save_metabox($post_id)
     } else {
         delete_post_meta($post_id,'product-area');
     }
+
+    // update availability meta
+    if ( !empty($_POST['hcf_area']) ) {
+        update_post_meta($post_id,'product-area',$_POST['hcf_area']);
+    } else {
+        delete_post_meta($post_id,'product-area');
+    }
+
+    // update capicity meta
+    if ( !empty($_POST['hcf_capicity']) ) {
+        update_post_meta($post_id,'product-capicity',$_POST['hcf_capicity']);
+    } else {
+        delete_post_meta($post_id,'product-capicity');
+    }
+
+    // update bedrooms meta
+    if ( !empty($_POST['hcf_bedrooms']) ) {
+        update_post_meta($post_id,'product-bedrooms',$_POST['hcf_bedrooms']);
+    } else {
+        delete_post_meta($post_id,'product-bedrooms');
+    }
+
+    // update rooms meta
+    if ( !empty($_POST['hcf_rooms']) ) {
+        update_post_meta($post_id,'product-rooms',$_POST['hcf_rooms']);
+    } else {
+        delete_post_meta($post_id,'product-rooms');
+    }
 }
 
 
@@ -143,6 +188,9 @@ function wphetic_metabox_render()
     $price = get_post_meta($_GET['post'], 'product-price',true);
     $availability = get_post_meta($_GET['post'],'product-availability',true);
     $area = get_post_meta($_GET['post'],'product-area',true);
+    $capacity = get_post_meta($_GET['post'], 'product-capacity',true);
+    $bedrooms = get_post_meta($_GET['post'],'product-bedrooms',true);
+    $rooms = get_post_meta($_GET['post'],'product-rooms',true);
     ?>
     <div class="hcf_box">
         <style scoped>
@@ -168,6 +216,18 @@ function wphetic_metabox_render()
         <p class="meta-options hcf_field">
             <label for="hcf_area">Surface Area</label>
             <input id="hcf_area" type="text" name="hcf_area" value="<?= $area; ?>">
+        </p>
+        <p class="meta-options hcf_field">
+            <label for="hcf_capacity">Price</label>
+            <input id="hcf_capacity" type="number" name="hcf_capacity" value="<?= $capacity; ?>">
+        </p>
+        <p class="meta-options hcf_field">
+            <label for="hcf_bedrooms">Price</label>
+            <input id="hcf_bedrooms" type="number" name="hcf_bedrooms" value="<?= $bedrooms; ?>">
+        </p>
+        <p class="meta-options hcf_field">
+            <label for="hcf_rooms">Price</label>
+            <input id="hcf_rooms" type="number" name="hcf_rooms" value="<?= $rooms; ?>">
         </p>
     </div>
     <?
