@@ -1,0 +1,201 @@
+ul {
+  list-style: none;
+  padding-left: 0;
+  font-weight: 500;
+}
+
+.contain_all {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.top_banner {
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  display: flex;
+  margin-bottom: 70px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: white;
+}
+
+.contain_searchbar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 55px;
+  margin-bottom: 7px;
+  background-color: #cecece;
+}
+
+.contain_searchbar > button {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.search_container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.search_container > input {
+  height: 30px;
+  width: 400px;
+  font-family: "Comic Neue", cursive;
+  font-weight: 700;
+}
+
+.container_filters {
+  height: 80%;
+  width: 197px;
+  margin-right: 10px;
+  padding: 18px 13px 37px;
+  background-color: #cecece;
+  font-size: 15px;
+  line-height: 115%;
+}
+
+.title_filters {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 21px;
+}
+
+.validation {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 160px;
+  font-size: 18px;
+  line-height: 20.7px;
+}
+
+.validation > input {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.container_list > h3 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.container_list > ul > li {
+  font-weight: 600;
+}
+
+.container_offers {
+  display: flex;
+  flex-direction: column;
+}
+
+.offer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offer_infos {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.offer_thumbnail {
+  width: 170px;
+  height: 170px;
+  background-color: yellow;
+}
+
+.offer_image > img {
+  width: 100%;
+}
+
+.container_offers {
+  width: 100%;
+  color: #ffffff;
+}
+
+.container_details {
+  width: auto;
+}
+
+.container_details > p:not(.title-offer) {
+  font-size: 18px;
+  margin: 10px 0px 10px 0px;
+}
+
+.title_offer {
+  font-size: 25px;
+  line-height: 28, 75px;
+  color: #ff55bb;
+}
+
+.price_offer {
+  color: gold;
+}
+
+.see_more {
+  width: 20%;
+}
+
+.see_more > img {
+  float: right;
+}
+
+.image_container {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom_banner {
+  position: relative;
+  align-self: center;
+  width: 500px;
+}
+@media screen and (max-width: 800px) {
+  .contain_all{
+    padding: 0;
+  }
+}
+@media screen and (max-width: 660px) {
+  .search_container input{
+    width: 200px;
+  }
+}
+@media screen and (max-width: 530px) {
+  .search_container input{
+    width: 100px;
+  }
+  .content {
+    flex-direction: column;
+  }
+  .validation {
+    margin: 0;
+  }
+  .container_filters {
+    width: 100%;
+    height: 50%;
+  }
+  .offer {
+    flex-direction: column;
+  }
+  .see_more {
+    width: 108px;
+  }
+}

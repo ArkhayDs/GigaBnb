@@ -1,0 +1,103 @@
+/** {
+  color: white;
+}*/
+
+.detail_bien {
+  height: auto;
+  min-width: 350px;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.main-image {
+  width: 100%;
+  height: 500px;
+  background-color: yellow;
+}
+
+.thumbnails {
+  display: flex;
+  margin-top: 25px;
+  height: 200px;
+  align-items: center;
+  gap: 25px;
+}
+
+.thumbnail {
+  height: 200px;
+  width: 200px;
+  background-color: yellow;
+}
+
+.location_and_price {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.yellow {
+  color: yellow;
+}
+
+.description {
+  width: 100%;
+  font-size: 20px;
+}
+
+.detail_footer {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seller {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  gap: 25px;
+}
+
+.seller_portrait {
+  height: 150px;
+  width: 150px;
+  border-radius: 100px;
+  background-color: yellow;
+}
+
+.seller_infos > h2 {
+  color: lawngreen;
+}
+
+.buy_button_container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.hand_gif {
+  height: 30px;
+}
+@media screen and (max-width: 800px) {
+  .detail_bien {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .description {
+    width: 90%;
+  }
+  .detail_footer {
+    flex-direction: column;
+    padding-top: 50px;
+  }
+  .detail_footer div{
+    justify-content: center;
+  }
+}

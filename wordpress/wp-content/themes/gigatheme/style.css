@@ -1,0 +1,44 @@
+/*
+ * Theme Name: GigaTheme
+ * Author: GigaGroup
+ * Description: Coucou, c'est le Gigatheme by @GigaWeb 2022
+ * Version: 1.0.0
+ */
+
+* {
+    font-family: "Comic Neue", cursive;
+
+}
+
+html {
+    background-image: url("./assets/images/grass-texture.png");
+
+}
+
+body {
+    margin: auto !important;
+    background-image: url("./assets/images/space-texture.png");
+    position: relative;
+    width: 55%;
+    height: auto;
+    overflow-x: hidden;
+}
+
+@media screen and (max-width: 1550px) {
+    body {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    body {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        width: 100%;
+    }
+}
+

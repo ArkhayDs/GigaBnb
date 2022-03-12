@@ -1,0 +1,154 @@
+.vente {
+  width: 529px;
+  height: auto;
+  border: 3px solid #676767;
+  background: #cecece;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: center; */
+  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+  padding: 25px;
+
+}
+textarea {
+  resize: none;
+}
+.vente form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.vente h1 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 29px;
+  text-align: center;
+  color: #ff55bb;
+  margin-bottom: 30px;
+}
+.vente span {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  width: 100%;
+}
+
+.vente div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 25px;
+  width: 100%;
+}
+
+.vente label {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100px;
+}
+.vente input {
+  font-style: normal;
+  margin-bottom: 10px;
+  margin-bottom: 10px;
+  width: 400px;
+}
+
+.checkboxes_container {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.type {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.type:nth-of-type(2) {
+  height: 100px;
+}
+
+.type > span {
+  justify-content: left;
+}
+
+.type > span > input {
+  width: auto;
+}
+
+.pic_section {
+  margin: 25px 0px;
+}
+
+.pic_section > h2 {
+  text-align: center;
+}
+
+.pic_section > button {
+  position: relative;
+  margin: 0 auto;
+  width: 120px;
+  height: 120px;
+}
+
+.preview > span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  /* padding-left: 25px; */
+  /* padding-right: 25px; */
+  width: 100%;
+  height: 25px;
+  background-color: #aaa;
+}
+
+.preview > span > button,
+p {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.preview > span > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+@media screen and (max-width: 1000px) {
+  .vente span {
+    flex-direction: column;
+  }
+  .checkboxes_container span{
+    flex-direction: row;
+  }
+  .preview span {
+    flex-direction: row;
+    width: 80%;
+    font-size: 12px;
+  }
+  .preview > span > button, p {
+    margin: 0;
+  }
+  .vente input {
+    width:90%;
+  }
+  textarea {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 640px) {
+  .vente {
+    width: 100%;
+    padding: 10px;
+
+  }
+}
