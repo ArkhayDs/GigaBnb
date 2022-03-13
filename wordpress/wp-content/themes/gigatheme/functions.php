@@ -252,3 +252,16 @@ function gigabnb_metabox_render()
     </div>
     <?
 }
+
+
+/*
+ * ADJUST THE QUERY DEPENDING ON THE SITUATION
+*/
+
+/*// Query products only everywhere
+add_action( 'pre_get_posts', 'query_only_products');
+function query_only_products(): WP_Query
+{
+
+
+}*/

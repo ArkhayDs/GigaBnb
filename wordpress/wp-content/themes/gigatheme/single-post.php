@@ -2,35 +2,25 @@
 
 <main>
     <section class="detail_bien">
-        <?php if (have_posts()) : ?>
 
-            <?php while (have_posts()) : the_post(); ?>
+        <h1><?php the_title()?></h1>
+        <br>
+        <img src="<?php the_post_thumbnail_url();?>" class="main-image">
+        <div class="thumbnails">
+            <img class="thumbnail">
+            <img class="thumbnail">
+            <img class="thumbnail">
+        </div>
+        <br>
+        <div class="location_and_price">
+            <h2><?php echo the_terms(get_the_ID(),'localisation');?></h2>
+            <h2 class="yellow">Prix : <?php echo get_post_meta(get_the_ID(),'product-price',true);?>€</h2>
+        </div>
 
-                <h1><?php the_title()?></h1>
-                <br>
-                <img src="<?php the_post_thumbnail_url();?>" class="main-image">
-                <div class="thumbnails">
-                    <img class="thumbnail">
-                    <img class="thumbnail">
-                    <img class="thumbnail">
-                </div>
-                <br>
-                <div class="location_and_price">
-                    <?php if(get_post_type() === 'product') : ?>
-                        <h2><?php echo the_terms(get_the_ID(),'localisation');?></h2>
-                    <?php endif; ?>
-                    <?php if (get_post_meta(get_the_ID(),'product-price',true)) : ?>
-                        <h2 class="yellow">Prix : <?php echo get_post_meta(get_the_ID(),'product-price',true);?>€</h2>
-                    <?php endif; ?>
-                </div>
-                <p class="description"><?php the_excerpt();?></p>
+        <p class="description"><?php the_excerpt();?></p>
 
-                <p class="card-text"><small class="text-muted">Publié le : <?php the_date(); ?></small></p>
-            <?php endwhile; ?>
+        <p class="card-text"><small class="text-muted">Publié le : <?php the_date(); ?></small></p>
 
-        <?php else : ?>
-            <h2>Pas de posts</h2>
-        <?php endif; ?>
         <br>
         <hr>
         <div class="detail_footer">

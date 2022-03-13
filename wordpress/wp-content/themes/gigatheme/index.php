@@ -2,9 +2,6 @@
 
 <h1>Hello World !</h1>
 
-<?php $args = array('post_type'=>'product'); ?>
-<?php query_posts($args); ?>
-
 <?php if (have_posts()) : ?>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <?php while (have_posts()) : the_post(); ?>
