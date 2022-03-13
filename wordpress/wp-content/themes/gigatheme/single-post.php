@@ -49,30 +49,16 @@
         <?php if(get_post_type() === 'product') : ?>
 
                 <div class="location_and_price">
-                    <?php if (get_post_meta(get_the_ID(),'localisation',true)) : ?>
-                        <h2><?php echo get_post_meta(get_the_ID(),'localisation',true);?></h2>
+                    <?php if (the_terms(get_the_ID(),'localisation')) : ?>
+                        <h2><?php echo the_terms(get_the_ID(),'localisation');?></h2>
                     <?php endif; ?>
                     <?php if (get_post_meta(get_the_ID(),'product-price',true)) : ?>
                         <h2 class="yellow">Prix : <?php echo get_post_meta(get_the_ID(),'product-price',true);?>€</h2>
                     <?php endif; ?>
                 </div>
-            <p class="card-text">
-
-            <?php if (get_post_meta(get_the_ID(),'product-availability',true)) : ?>
-                <br/>Disponible à partir du : <?php echo date_format(new DateTime(get_post_meta(get_the_ID(),'product-availability',true)),"d/m/Y");?>
-            <?php endif; ?>
-
-            <?php if (get_post_meta(get_the_ID(),'product-area',true)) : ?>
-                <br/>Surface : <?php echo get_post_meta(get_the_ID(),'product-area',true);?>m²
-            <?php endif; ?>
-            </p>
+                <p class="description"><?php the_content();?></p>
         <?php endif; ?>
-        <div class="location_and_price">
-            <h2>[Localisation du bien - type de bien / type d'acquisition]</h2>
-            <h2 class="yellow">[prix]</h2>
-        </div>
 
-        <p class="description"><?php the_content();?></p>
 
         <br>
         <hr>
