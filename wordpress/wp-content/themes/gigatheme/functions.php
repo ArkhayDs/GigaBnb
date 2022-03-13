@@ -74,7 +74,7 @@ function gigabnb_register_type_taxonomy()
     $args_modalite = [
         'labels' => $labels_modalite,
         'public' => true,
-        'hierarchical' => true,
+        'hierarchical' => false,
         'show_in_rest' => true,
         'show_admin_column' => true
     ];
@@ -138,31 +138,7 @@ add_action('after_switch_theme', function () {
     $admin->add_cap('manage_products');
 });
 
-/*
- * Ajout d'un rôle "Product Manager" quand on active le thème
- */
-add_action('after_switch_theme', function() {
-    remove_role('product_manager'); // lors du refactor, déplacer cette ligne pour l'exécuter à la désactivation du thèmee ou plugin
-    add_role('product_manager','Gestionnaire Produit', [
-            'read' => true,
-            'manage_products' => true,
-            'edit_posts' => true
-    ]);
-});
 
-/*
- * Prevent custom role to access admin pages that thy won't need
- */
-add_action('admin_menu', 'product_manager_remove_menu_pages');
-function product_manager_remove_menu_pages() {
-    $user = wp_get_current_user();
-    if ( in_array('product_manager',$user->roles) ) {
-        remove_menu_page('edit.php');
-        remove_menu_page('upload.php');
-        remove_menu_page('edit-comments.php');
-        remove_menu_page('tools.php');
-    }
-}
 
 /*
  * Ajout d'un rôle "Moderator" quand on active le thème
@@ -173,7 +149,8 @@ add_action('after_switch_theme', function() {
         'read' => true,
         'edit_posts' => true,
         'manage_products' => true,
-        'moderate_comments' => true
+        'moderate_comments' => true,
+        'delete_posts' => true
     ]);
 });
 
@@ -188,6 +165,7 @@ function moderator_remove_menu_pages() {
         remove_menu_page('tools.php');
     }
 }
+
 
 
 // add the custom box field for the product infos
@@ -212,32 +190,11 @@ function gigabnb_save_metabox($post_id)
         delete_post_meta($post_id,'product-price');
     }
 
-    // update availability meta
-    if ( !empty($_POST['hcf_date']) ) {
-        update_post_meta($post_id,'product-availability',$_POST['hcf_date']);
-    } else {
-        delete_post_meta($post_id,'product-availability');
-    }
-
-    // update availability meta
+    // update area meta
     if ( !empty($_POST['hcf_area']) ) {
         update_post_meta($post_id,'product-area',$_POST['hcf_area']);
     } else {
-        delete_post_meta($post_id,'product-area');
-    }
-
-    // update availability meta
-    if ( !empty($_POST['hcf_area']) ) {
-        update_post_meta($post_id,'product-area',$_POST['hcf_area']);
-    } else {
-        delete_post_meta($post_id,'product-area');
-    }
-
-    // update capicity meta
-    if ( !empty($_POST['hcf_capicity']) ) {
-        update_post_meta($post_id,'product-capicity',$_POST['hcf_capicity']);
-    } else {
-        delete_post_meta($post_id,'product-capicity');
+        delete_post_meta($post_id, 'product-area');
     }
 
     // update bedrooms meta
@@ -259,9 +216,7 @@ function gigabnb_save_metabox($post_id)
 function gigabnb_metabox_render()
 {
     $price = get_post_meta($_GET['post'], 'product-price',true);
-    $availability = get_post_meta($_GET['post'],'product-availability',true);
     $area = get_post_meta($_GET['post'],'product-area',true);
-    $capacity = get_post_meta($_GET['post'], 'product-capacity',true);
     $bedrooms = get_post_meta($_GET['post'],'product-bedrooms',true);
     $rooms = get_post_meta($_GET['post'],'product-rooms',true);
     ?>
@@ -283,16 +238,8 @@ function gigabnb_metabox_render()
             <input id="hcf_price" type="number" name="hcf_price" value="<?= $price; ?>">
         </p>
         <p class="meta-options hcf_field">
-            <label for="hcf_date">Available from</label>
-            <input id="hcf_date" type="date" name="hcf_date" value="<?= $availability; ?>">
-        </p>
-        <p class="meta-options hcf_field">
             <label for="hcf_area">Surface Area</label>
             <input id="hcf_area" type="text" name="hcf_area" value="<?= $area; ?>">
-        </p>
-        <p class="meta-options hcf_field">
-            <label for="hcf_capacity">Nombre de personnes</label>
-            <input id="hcf_capacity" type="number" name="hcf_capacity" value="<?= $capacity; ?>">
         </p>
         <p class="meta-options hcf_field">
             <label for="hcf_bedrooms">Nombre de chambres</label>

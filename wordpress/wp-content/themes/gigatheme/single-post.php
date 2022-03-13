@@ -10,27 +10,13 @@
                 <h5 class="card-title"><?php the_title()?></h5>
 
                 <?php if(get_post_type() === 'product') : ?>
-                <p><small>Detail(s) : <?php the_terms(get_the_ID(),'type'); the_terms(get_the_ID(),'modalite',', '); ?></small></p>
+                <p><small>Detail(s) : <?php the_terms(get_the_ID(),'type'); the_terms(get_the_ID(),'modalite',', '); the_terms(get_the_ID(),'localisation',', ');?></small></p>
                 <?php endif; ?>
 
                 <p class="card-text"><?php the_content();?></p>
                 <p class="card-text"><?php the_excerpt();?></p>
 
-                <?php if(get_post_type() === 'product') : ?>
-                    <p class="card-text">
-                    <?php if (get_post_meta(get_the_ID(),'product-price',true)) : ?>
-                        <p class="card-text">Prix : <?php echo get_post_meta(get_the_ID(),'product-price',true);?>€
-                    <?php endif; ?>
 
-                    <?php if (get_post_meta(get_the_ID(),'product-availability',true)) : ?>
-                        <br/>Disponible à partir du : <?php echo date_format(new DateTime(get_post_meta(get_the_ID(),'product-availability',true)),"d/m/Y");?>
-                    <?php endif; ?>
-
-                    <?php if (get_post_meta(get_the_ID(),'product-area',true)) : ?>
-                        <br/>Surface : <?php echo get_post_meta(get_the_ID(),'product-area',true);?>m²
-                    <?php endif; ?>
-                    </p>
-                <?php endif; ?>
 
                 <p class="card-text"><small class="text-muted">Publié le : <?php the_date(); ?></small></p>
             </div>
@@ -50,33 +36,44 @@
 
 <main>
     <section class="detail_bien">
-        <h1>[nom du bien - localisaton]</h1>
+        <h1><?php the_title()?></h1>
         <br>
-        <img class="main-image">
+        <img src="<?php the_post_thumbnail_url();?>" class="main-image">
         <div class="thumbnails">
             <img class="thumbnail">
             <img class="thumbnail">
             <img class="thumbnail">
         </div>
         <br>
+
+        <?php if(get_post_type() === 'product') : ?>
+
+                <div class="location_and_price">
+                    <?php if (get_post_meta(get_the_ID(),'localisation',true)) : ?>
+                        <h2><?php echo get_post_meta(get_the_ID(),'localisation',true);?></h2>
+                    <?php endif; ?>
+                    <?php if (get_post_meta(get_the_ID(),'product-price',true)) : ?>
+                        <h2 class="yellow">Prix : <?php echo get_post_meta(get_the_ID(),'product-price',true);?>€</h2>
+                    <?php endif; ?>
+                </div>
+            <p class="card-text">
+
+            <?php if (get_post_meta(get_the_ID(),'product-availability',true)) : ?>
+                <br/>Disponible à partir du : <?php echo date_format(new DateTime(get_post_meta(get_the_ID(),'product-availability',true)),"d/m/Y");?>
+            <?php endif; ?>
+
+            <?php if (get_post_meta(get_the_ID(),'product-area',true)) : ?>
+                <br/>Surface : <?php echo get_post_meta(get_the_ID(),'product-area',true);?>m²
+            <?php endif; ?>
+            </p>
+        <?php endif; ?>
         <div class="location_and_price">
             <h2>[Localisation du bien - type de bien / type d'acquisition]</h2>
             <h2 class="yellow">[prix]</h2>
         </div>
-        <p class="description">[description]Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Integer sit amet urna et ex varius aliquam.
-            Sed orci est, ultricies id laoreet at, sollicitudin eu felis.
-            Orci varius natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus. Donec ac urna ut diam vestibulum commodo.
-            Interdum et malesuada fames ac ante ipsum primis in faucibus.
-            Pellentesque id tellus vel velit ornare laoreet.
-            Suspendisse sed sodales felis. Quisque sollicitudin ante neque,
-            eget malesuada nisi euismod nec. Nam ultricies lacinia nisl vitae iaculis.
-            Integer id ante arcu. Nunc efficitur commodo semper.
-            Integer porttitor imperdiet augue, eu euismod sem lacinia sed.
-            Vivamus in nulla scelerisque, lacinia odio quis, imperdiet ipsum.
-            Sed tempor neque non ante pretium porttitor.
-        </p>
+
+        <p class="description"><?php the_content();?></p>
+
         <br>
         <hr>
         <div class="detail_footer">
