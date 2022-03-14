@@ -255,13 +255,8 @@ function gigabnb_metabox_render()
 
 
 /*
- * ADJUST THE QUERY DEPENDING ON THE SITUATION
+ * ADJUST DISPLAY FOR USERS
 */
-
-/*// Query products only everywhere
-add_action( 'pre_get_posts', 'query_only_products');
-function query_only_products(): WP_Query
-{
-
-
-}*/
+if ( in_array( 'subscriber', (array) wp_get_current_user()->roles ) ) {
+    add_filter( 'show_admin_bar', '__return_false' );
+}

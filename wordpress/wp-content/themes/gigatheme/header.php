@@ -15,9 +15,11 @@
     <a href="/">
         <img class="header_central_button" src="<?= get_template_directory_uri() ?>/assets/images/Header/header_Albnb.png">
     </a>
-    <a onmouseenter="playshootingstars()" class="header_side_button_container" href="#">
+    <a onmouseenter="playshootingstars()" class="header_side_button_container" href="/connexion/">
         <img class="header_side_buttons" src="<?= get_template_directory_uri() ?>/assets/images/Header/inscription_connexion.png">
     </a>
+
+    <a href="<?= wp_logout_url(home_url()); ?>">Deconnexion</a>
 </header>
 
                 <?php /*wp_nav_menu([

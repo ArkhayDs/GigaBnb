@@ -78,14 +78,14 @@ body {
 .connexion input[type="submit"] {
   width: 84px;
   height: 138px;
-  background-image: url(./assets/Inscription_connexion/porte_statique.png);
+  background-image: url(../images/Inscription_connexion/porte_statique.png);
   background-size: contain;
   background-repeat: no-repeat;
   margin: 0;
   border: none;
 }
 .connexion input[type="submit"]:hover {
-  background-image: url(./assets/Inscription_connexion/porte_animée.gif);
+  background-image: url(../images/Inscription_connexion/porte_animée.gif);
 }
 .connexion .entrez {
   text-align: center;
