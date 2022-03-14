@@ -9,7 +9,7 @@ get_header()?>
 
     <main>
         <div class="connexion">
-            <form action="" method="post">
+            <form action="<?= home_url('wp-login.php'); ?>" method="post">
                 <h1>Connexion</h1>
 
                 <span>
@@ -44,5 +44,4 @@ get_header()?>
     </script>
 
 <?php
-//echo scandir(get_template_directory()'../assets/');
 get_footer()?>
