@@ -13,7 +13,7 @@
 .main-image {
   width: 100%;
   height: 500px;
-  background-color: yellow;
+  /* background-color: yellow; */
 }
 
 .thumbnails {
@@ -83,6 +83,32 @@
 .hand_gif {
   height: 30px;
 }
+
+.comment {
+  margin-bottom: 25px;
+  background-color: #eee;
+  width: 50%;
+  padding: 10px;
+}
+
+.comment * {
+  color: black;
+}
+
+.comment a:nth-of-type(2),
+.reply > a {
+  color: blue;
+}
+
+.comment-form-comment > label {
+  display: none;
+}
+
+.comment-form-comment > textarea {
+  width: 50%;
+  color: black;
+}
+
 @media screen and (max-width: 800px) {
   .detail_bien {
     padding: 10px;
@@ -90,6 +116,12 @@
 }
 
 @media screen and (max-width: 530px) {
+  .comment-form-comment > textarea {
+    width: 90%;
+  }
+  .comment {
+    width: 90%;
+  }
   .description {
     width: 90%;
   }
@@ -97,7 +129,7 @@
     flex-direction: column;
     padding-top: 50px;
   }
-  .detail_footer div{
+  .detail_footer div {
     justify-content: center;
   }
 }

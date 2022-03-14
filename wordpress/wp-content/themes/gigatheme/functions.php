@@ -12,7 +12,7 @@ function gigabnb_stylesheets() {
     wp_enqueue_style('gigabnb-css-homepage',get_template_directory_uri() .'/assets/css/homepage.css');
     wp_enqueue_style('gigabnb-css-header',get_template_directory_uri() .'/assets/css/header.css');
     wp_enqueue_style('gigabnb-css-footer',get_template_directory_uri() .'/assets/css/footer.css');
-    wp_enqueue_style('gigabnb-css-detailbien',get_template_directory_uri() .'/assets/css/detailbien.css');
+    wp_enqueue_style('gigabnb-css-single-post',get_template_directory_uri() .'/assets/css/single-post.css');
     wp_enqueue_style('gigabnb-css-loginsignup',get_template_directory_uri() .'/assets/css/connexion-inscription.css');
     wp_enqueue_style('gigabnb-css',get_stylesheet_uri());
     wp_enqueue_style('bootstrap_css','https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
@@ -259,4 +259,31 @@ function gigabnb_metabox_render()
 */
 if ( in_array( 'subscriber', (array) wp_get_current_user()->roles ) ) {
     add_filter( 'show_admin_bar', '__return_false' );
+}
+
+// add_action('pre_get_posts', 'giga_homepage_query');
+// function giga_homepage_query($query)
+// {
+//     if ($query->is_home() && $query->is_main_query()) {
+//         $query = new WP_Query(array(
+//             'post_type' => 'product',
+//             'post_per_page' => 3
+//         ));
+//     }
+// }
+
+
+function gigaPagination($query)
+{
+
+    echo '<nav>';
+    echo '<ul class="pagination">';
+    $pages = paginate_links(['type' => 'array', "total" => $query->max_num_pages, "current" => max(1, get_query_var('paged'))]);
+    foreach ($pages as $page) {
+        echo '<li class="page">';
+        echo str_replace('page-numbers', 'page-link', $page);
+        echo '</li>';
+    };
+    echo '</ul>';
+    echo '</nav>';
 }

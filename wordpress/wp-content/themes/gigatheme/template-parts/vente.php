@@ -5,7 +5,7 @@
  */
 get_header();
 
-/*if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['newpost'] )) { // has the form been submitted ?
+if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['newpost'] )) { // has the form been submitted ?
 
     $post_title = $_POST["name"];
     $post_location = $_POST["localisation"];
@@ -41,7 +41,7 @@ get_header();
 
 if (is_user_logged_in()) { // is user logged in before presenting form ?
 
-    $current_user = wp_get_current_user();*/
+    $current_user = wp_get_current_user();
 
 ?>
 
@@ -127,8 +127,8 @@ if (is_user_logged_in()) { // is user logged in before presenting form ?
 </main>
 
 <?php
-    /*} else {
+    } else {
         echo 'please login';
     }
-}*/
+}
 get_footer();?>
