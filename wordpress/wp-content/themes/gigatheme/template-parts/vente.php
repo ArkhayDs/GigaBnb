@@ -3,18 +3,19 @@
  * Template Name: Vendor Form - Giga Theme
  * Description: Giga Theme vendor form.
  */
-get_header();
+if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['action'] ) &&  $_POST['action'] == "new_post" ) { // has the form been submitted ?
 
-if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['newpost'] )) { // has the form been submitted ?
-
-    $post_title = $_POST["name"];
-    $post_location = $_POST["localisation"];
+    $post_title = $_POST["postname"];
     $post_price = $_POST["price"];
+    $post_area = $_POST["area"];
+    $post_bedrooms = $_POST["bedrooms"];
+    $post_rooms = $_POST["rooms"];
     $post_desc = $_POST["description"];
     $post_author = get_current_user_id();
 
-    $post_type = $_POST["type"];
-    $post_modalite = $_POST["modalite"];
+    $post_type = get_term_by('name',$_POST["type"],'type')->term_id; // -> is a hierarchical taxo
+    $post_location = get_term_by('name',$_POST["localisation"],'localisation')->term_id; // -> is a hierarchical taxo
+    $post_modalite = $_POST["modalite"]; // -> is a tag
 
     $newpost = array(
         'post_title' => $post_title,
@@ -29,30 +30,38 @@ if( 'POST' == $_SERVER['REQUEST_METHOD'] && !empty( $_POST['newpost'] )) { // ha
     if ($post_id) {
         // insert custom meta
         add_post_meta($post_id, 'product-price', $post_price); // to do - add for other metas
-        // problème, si on passe des strings il peut y avoir des conflits de hiérarchie entre les terms (e.g. : 6e arr Paris / 6e arr Lyon)
-        // il faut fetch la liste des terms pour chaque type (et dans l'idéal pousser l'id à chaque fois des parents & enfants à ajouter)
+        add_post_meta($post_id, 'product-area', $post_area); // to do - add for other metas
+        add_post_meta($post_id, 'product-bedrooms', $post_bedrooms); // to do - add for other metas
+        add_post_meta($post_id, 'product-rooms', $post_rooms); // to do - add for other metas
         wp_set_post_terms($post_id, $post_type, 'type');
-        wp_set_post_terms($post_id, $post_location, 'location');
+        wp_set_post_terms($post_id, $post_location, 'localisation');
         wp_set_post_terms($post_id, $post_modalite, 'modalite');
     }
-    wp_redirect( get_permalink($post_id) );
+
+    wp_redirect( "/" );
+
+    get_header();
 
 } else {
 
-if (is_user_logged_in()) { // is user logged in before presenting form ?
+    if (is_user_logged_in()) { // is user logged in before presenting form ?
 
-    $current_user = wp_get_current_user();
+        $current_user = wp_get_current_user();
+
+get_header();
 
 ?>
 
 <main>
     <div class="vente">
-        <form action="" id="new_post" name="new_post" method="POST">
+
+        <form id="new_post" name="new_post" method="POST">
+
             <h1>Proposer un bien</h1>
 
             <span>
                 <label>Nom du bien :</label>
-                <input type="text" placeholder="Entrez le nom du bien" name="name" required>
+                <input type="text" placeholder="Entrez le nom du bien" name="postname" required>
             </span>
             <span>
                 <label>Localisation :</label>
@@ -62,6 +71,18 @@ if (is_user_logged_in()) { // is user logged in before presenting form ?
                 <label>Prix (€) :</label>
                 <input type="number" placeholder="Entrez le prix de vitre bien" name="price" required>
             </span>
+            <span>
+                <label>Surface (m2) :</label>
+                <input type="number" placeholder="Entrez la surface de votre bien" name="area" required>
+            </span>
+            <span>
+                <label>Nombre de chambres :</label>
+                <input type="number" placeholder="Entrez le nombre de chambres de votre bien" name="bedrooms" required>
+            </span>
+            <span>
+                <label>Nombre de pièces :</label>
+                <input type="number" placeholder="Entrez le nombre de pièces de votre bien" name="rooms" required>
+            </span>
             <div>
                 <label>Description :</label>
                 <textarea cols="50" rows="10" placeholder="Décrivez votre bien" name="description" required></textarea>
@@ -70,35 +91,34 @@ if (is_user_logged_in()) { // is user logged in before presenting form ?
                 <div class="type">
                     <h3>Type de logement</h3>
                     <span>
-                        <input class="checkbox" type="radio"  name="type" required>
-                        <label class="checkbox-label">Maison</a></label>
+                        <input class="checkbox" type="radio"  name="type" value="Maison" required>Maison
                     </span>
                     <span>
-                        <input class="checkbox" type="radio"  name="type" required>
-                        <label class="checkbox-label">Appartement</label>
+                        <input class="checkbox" type="radio"  name="type" value="Appartement" required>Appartement
                     </span>
                     <span>
-                        <input class="checkbox" type="radio"  name="type" required>
-                        <label class="checkbox-label">Domaine</label>
+                        <input class="checkbox" type="radio"  name="type" value="Duplex" required>Duplex
                     </span>
                     <span>
-                        <input class="checkbox" type="radio"  name="type" required>
-                        <label class="checkbox-label">Viager</label>
+                        <input class="checkbox" type="radio"  name="type" value="Villa" required>Villa
                     </span>
                     <span>
-                        <input class="checkbox" type="radio"  name="type" required>
-                        <label class="checkbox-label">Chalet</label>
+                        <input class="checkbox" type="radio"  name="type" value="Domaine" required>Domaine
+                    </span>
+                    <span>
+                        <input class="checkbox" type="radio"  name="type" value="Viager" required>Viager
+                    </span>
+                    <span>
+                        <input class="checkbox" type="radio"  name="type" value="Chalet" required>Chalet
                     </span>
                 </div>
                 <div class="type">
-                    <h3>type de logement</h3>
+                    <h3>Modalité de paiement</h3>
                     <span>
-                        <input class="checkbox" type="radio"  name="modalite" required>
-                        <label class="checkbox-label">Achat</label>
+                        <input class="checkbox" type="radio"  name="modalite" value="Achat" required>Achat
                     </span>
                     <span>
-                        <input class="checkbox" type="radio"  name="modalite" required>
-                        <label class="checkbox-label">Viager</a></label>
+                        <input class="checkbox" type="radio"  name="modalite" value="Location" required>Location
                     </span>
                 </div>
             </div>
@@ -114,14 +134,12 @@ if (is_user_logged_in()) { // is user logged in before presenting form ?
                 </div>
             </div>
 
-<!--            TO DELETE -->
-            <input type="hidden" name="newpost" value="post" />
-
             <button type="submit" id='submit' value='' name="submit">
                 <img src="../assets/images/Page_vendre_bien/bouton_vente.png" alt="">
             </button>
 
-            <?php wp_nonce_field( 'new_post' ); ?>
+            <input type="hidden" name="action" value="new_post" />
+            <?php wp_nonce_field( 'cpt_nonce_action','cpt_nonce_field' ); ?>
         </form>
     </div>
 </main>
@@ -131,4 +149,4 @@ if (is_user_logged_in()) { // is user logged in before presenting form ?
         echo 'please login';
     }
 }
-get_footer();?>
+get_footer();

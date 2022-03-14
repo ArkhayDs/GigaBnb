@@ -9,7 +9,11 @@
 </head>
 <body>
 <header>
-    <a onmouseenter="playshootingstars()" class="header_side_button_container" href="#">
+    <a onmouseenter="playshootingstars()" class="header_side_button_container" href="#"><?= wp_nav_menu([
+            'theme_location' => 'header',
+            'container' => false,
+            'menu_class' => "header_side_button_container"
+        ]);?>
         <img class="header_side_buttons" src="<?= get_template_directory_uri() ?>/assets/images/Header/vendre_un_bien.png">
     </a>
     <a href="/">
@@ -21,11 +25,6 @@
 
     <a href="<?= wp_logout_url(home_url()); ?>">Deconnexion</a>
 </header>
-
-                <?php /*wp_nav_menu([
-                    'theme_location' => 'header',
-                    'container' => false,
-                    'menu_class' => "navbar-nav me-auto mb-2 mb-lg-0"
-                ]); */?><!--
+                <!--
 
                 --><?php /*get_search_form() */?>
