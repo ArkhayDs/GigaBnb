@@ -23,50 +23,24 @@ $user_products_query = new WP_Query($args);
 get_header();
 
 ?>
-
     <main>
         <div class="compte">
-            <h1>Mon compte</h1>
-            <figure>
-                <img src="" alt="">
-            </figure>
-            <button>Modifier photo de profil</button>
-            <form action="Modifier_nom">
-            <span>
-                <label>Modifier nom :</label>
-                <input type="text" placeholder="Modifier mon nom" name="log">
-            </span>
-                <input type="submit" id='submit' value='modifier mon nom' name="wp-submit">
-            </form>
-            <form action="Modifier_mdp">
-            <span>
-                <label>Modifier mot de passe :</label>
-                <input type="password" placeholder="Modifier mon mot de passe" name="pwd">
-            </span>
-                <input type="submit" id='submit' value='modifier mon mot de passe' name="wp-submit">
-            </form>
-        </div>
-    </main>
-
-    <main>
-        <div class="compte">
-            <h1>Mon compte</h1>
+            <h1>Mon profil</h1>
             <section class="info_profil">
-                <figure>
-                    <img src="<?= get_avatar_url($current_user->ID) ?>" alt="">
+                <figure class="offer_thumbnail" >
+                    <img style="border-radius: 100% ;" src="<?= get_avatar_url($current_user->ID) ?>" alt="">
                 </figure>
                 <div>
                     <div class="infos">
                         <h3><?= $current_user->nickname ?></h3>
                         <h3><?= $current_user->user_email ?></h3>
-                        <h3>Propriétés :</h3>
                     </div>
                     <div class="modif_infos">
                         <a href="#"><img src="./assets/images/Page-compte/edit.svg" alt=""></a>
                     </div>
                 </div>
             </section>
-            <section>
+            <section class="related_posts">
                 <table>
                     <thead>
                     <tr>
@@ -89,9 +63,35 @@ get_header();
                 </table>
 
             </section>
-                <a href="<?= wp_logout_url(home_url()); ?>">Déconnexion</a>
         </div>
     </main>
 
+
+    <main>
+        <div class="compte">
+            <h1>Mon compte</h1>
+            <figure class="offer_thumbnail" >
+                <img style="border-radius: 100% ;" src="<?= get_avatar_url($current_user->ID) ?>" alt="">
+            </figure>
+            <button>Modifier photo de profil</button>
+            <form action="Modifier_nom">
+            <span>
+                <label>Modifier nom :</label>
+                <input type="text" placeholder="Modifier mon nom" name="log">
+            </span>
+                <input type="submit" id='submit' value='modifier mon nom' name="wp-submit">
+            </form>
+            <form action="Modifier_mdp">
+            <span>
+                <label>Modifier mot de passe :</label>
+                <input type="password" placeholder="Modifier mon mot de passe" name="pwd">
+            </span>
+                <input type="submit" id='submit' value='modifier mon mot de passe' name="wp-submit">
+            </form>
+
+            <a href="<?= wp_logout_url(home_url()); ?>">Déconnexion</a>
+        </div>
+
+    </main>
 <?php
 get_footer(); ?>

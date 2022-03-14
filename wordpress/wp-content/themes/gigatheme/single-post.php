@@ -20,7 +20,7 @@
         <hr>
         <div class="detail_footer">
             <div class="seller">
-                <img class="seller_portrait">
+                <img class="seller_portrait" src="<?= get_avatar_url($current_user->ID) ?>">
                 <div class="seller_infos">
                     <h2><?php the_author(); ?></h2>
                 </div>
@@ -28,7 +28,7 @@
             <div class="buy_button_container">
                 <img class="hand_gif" src="./assets/Page_bien/main.gif" alt="">
                 <a href="/">
-                    <img class="buy_button" src="./assets/Page_bien/bouton_acheter.png" alt="">
+                    <img class="buy_button" src="./assets/images/Page_bien/bouton_acheter.png" alt="">
                 </a>
             </div>
         </div>

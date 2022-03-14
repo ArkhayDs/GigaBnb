@@ -9,7 +9,7 @@ get_header()?>
 
     <main>
         <div class="connexion">
-            <form action="<?= home_url('wp-login.php'); ?>" method="post">
+            <form action="" method="post">
                 <h1>Connexion</h1>
 
                 <span>
@@ -27,12 +27,22 @@ get_header()?>
 
                 <a class="mdp-oublie" href="https://www.youtube.com/watch?v=OZw9L-PkRKs&ab_channel=HMomentPalli">mot de passe oublié</a>
 
-                <input type="submit" id='submit' value='' name="wp-submit">
+                <input onmouseenter="playdoorsound()" type="submit" id='submit' value='' name="wp-submit">
                 <p class="entrez">↑ Entrez ↑</p>
-                <p>Je n’ai pas de compte : <a href="./inscription.html">Inscription</a></p>
+                <p>Je n’ai pas de compte : <a href="/inscription/">Inscription</a></p>
                 <input type="hidden" name="redirect_to" value="/" />
             </form>
         </div>
     </main>
 
-<?php get_footer()?>
+    <script>
+        let doorSound = new Audio('../assets/Audio/re2-door-opening-sfx.mp3');
+
+        function playdoorsound(){
+            doorSound.play()
+        };
+    </script>
+
+<?php
+//echo scandir(get_template_directory()'../assets/');
+get_footer()?>
