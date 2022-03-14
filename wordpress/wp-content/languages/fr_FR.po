@@ -11531,8 +11531,8 @@ msgstr "Relation avec le propriétaire du site lié (XFN)"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:119
 #: wp-admin/includes/nav-menu.php:1116
-msgid "CSS Classes"
-msgstr "Classes CSS"
+msgid "CSS classes"
+msgstr "classes CSS"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:113
 #: wp-admin/includes/class-walker-nav-menu-edit.php:209

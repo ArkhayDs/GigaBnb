@@ -13,6 +13,7 @@ function gigabnb_stylesheets() {
     wp_enqueue_style('gigabnb-css-header',get_template_directory_uri() .'/assets/css/header.css');
     wp_enqueue_style('gigabnb-css-footer',get_template_directory_uri() .'/assets/css/footer.css');
     wp_enqueue_style('gigabnb-css-single-post',get_template_directory_uri() .'/assets/css/single-post.css');
+    wp_enqueue_style('gigabnb-css-compte-settings',get_template_directory_uri() .'/assets/css/compte.css');
     wp_enqueue_style('gigabnb-css-loginsignup',get_template_directory_uri() .'/assets/css/connexion-inscription.css');
     wp_enqueue_style('gigabnb-css',get_stylesheet_uri());
     wp_enqueue_style('bootstrap_css','https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css');
@@ -99,19 +100,29 @@ function gigabnb_register_type_taxonomy()
     register_taxonomy('localisation', ['product'], $args_localisation);
 }
 
-// add custom post type (cpt) -> use this to manage products
-add_action('init', 'gigabnb_register_event_cpt');
-function gigabnb_register_event_cpt()
-{
-    $labels = [
+/*
+ * Modifier les rôles de l'admin quand on active le thème
+ * Raison : suite à l'ajout de 'capabilities', les admins n'ont plus accès aux produits !
+ * il faut donc leur rajouter ce droit custom (manage_products) à l'activation du thème
+ */
+add_action('after_switch_theme', function () {
+    $admin = get_role('administrator');
+    $admin->add_cap('manage_products');
+});
+
+/*
+ * add custom post type (cpt) -> use this to manage products
+ * you need to pass $labels & $args
+ * Please note that you don't have to add $labels to your $args as they will be added by the __construct
+*/
+require_once 'classes/Add_CPT.php';
+$product_cpt = new Add_CPT('product',
+    [
         'name' => 'Produits',
         'singular_name' => 'Produit',
         'search_items' => 'Rechercher un produit',
         'all_items' => 'Tous les produits'
-    ];
-
-    $args = [
-        'labels' => $labels,
+    ], [
         'public' => true,
         'show_in_rest' => true,
         'menu_icon' => 'dashicons-store',
@@ -119,40 +130,38 @@ function gigabnb_register_event_cpt()
         'has_archive' => true,
         'taxonomies' => ['type','modalite','localisation'],
         'capabilities' => array(
-                'edit_post' => 'manage_products',
-                'read_post' => 'manage_products',
-                'delete_post' => 'manage_products'
+            'edit_post' => 'manage_products',
+            'read_post' => 'manage_products',
+            'delete_post' => 'manage_products'
         )
-    ];
+]);
 
-    register_post_type('product',$args);
-}
-
-// suite à l'ajout de 'capabilities', les admins n'ont plus accès aux produits !
-// il faut donc leur rajouter ce droit custom (manage_products) à l'activation du thème
 /*
- * Modifier les rôles de l'admin quand on active le thème
+ * Use Custom_metabox Class to create our custom metas for the products
  */
-add_action('after_switch_theme', function () {
-    $admin = get_role('administrator');
-    $admin->add_cap('manage_products');
-});
-
+require_once 'classes/Custom_metabox.php';
+$price = new Custom_metabox(
+    array(
+        'product-price',
+        'product-area',
+        'product-bedrooms',
+        'product-rooms'
+    )
+);
 
 
 /*
  * Ajout d'un rôle "Moderator" quand on active le thème
  */
-add_action('after_switch_theme', function() {
-    remove_role('moderator'); // lors du refactor, déplacer cette ligne pour l'exécuter à la désactivation du thèmee ou plugin
-    add_role('moderator','Modérateur / Modératrice', [
+require_once 'classes/Custom_role.php';
+$moderator = new Custom_role('moderator', 'Modérateur / Modératrice', [
         'read' => true,
         'edit_posts' => true,
         'manage_products' => true,
         'moderate_comments' => true,
         'delete_posts' => true
-    ]);
-});
+    ]
+);
 
 /*
  * Prevent custom role to access admin pages that thy won't need
@@ -166,100 +175,13 @@ function moderator_remove_menu_pages() {
     }
 }
 
-
-
-// add the custom box field for the product infos
-add_action('add_meta_boxes','gigabnb_add_meta_boxes');
-function gigabnb_add_meta_boxes() {
-    add_meta_box(
-        'product-infos',
-        'Informations Produit',
-        'gigabnb_metabox_render',
-        'product'
-    );
-}
-
-add_action('save_post','gigabnb_save_metabox');
-function gigabnb_save_metabox($post_id)
-{
-
-    // update price meta
-    if ( !empty($_POST['hcf_price']) ) {
-        update_post_meta($post_id,'product-price',$_POST['hcf_price']);
-    } else {
-        delete_post_meta($post_id,'product-price');
-    }
-
-    // update area meta
-    if ( !empty($_POST['hcf_area']) ) {
-        update_post_meta($post_id,'product-area',$_POST['hcf_area']);
-    } else {
-        delete_post_meta($post_id, 'product-area');
-    }
-
-    // update bedrooms meta
-    if ( !empty($_POST['hcf_bedrooms']) ) {
-        update_post_meta($post_id,'product-bedrooms',$_POST['hcf_bedrooms']);
-    } else {
-        delete_post_meta($post_id,'product-bedrooms');
-    }
-
-    // update rooms meta
-    if ( !empty($_POST['hcf_rooms']) ) {
-        update_post_meta($post_id,'product-rooms',$_POST['hcf_rooms']);
-    } else {
-        delete_post_meta($post_id,'product-rooms');
-    }
-}
-
-
-function gigabnb_metabox_render()
-{
-    $price = get_post_meta($_GET['post'], 'product-price',true);
-    $area = get_post_meta($_GET['post'],'product-area',true);
-    $bedrooms = get_post_meta($_GET['post'],'product-bedrooms',true);
-    $rooms = get_post_meta($_GET['post'],'product-rooms',true);
-    ?>
-    <div class="hcf_box">
-        <style scoped>
-            .hcf_box{
-                display: grid;
-                grid-template-columns: max-content 1fr;
-                grid-row-gap: 10px;
-                grid-column-gap: 20px;
-            }
-            .hcf_field{
-                display: contents;
-            }
-        </style>
-
-        <p class="meta-options hcf_field">
-            <label for="hcf_price">Price</label>
-            <input id="hcf_price" type="number" name="hcf_price" value="<?= $price; ?>">
-        </p>
-        <p class="meta-options hcf_field">
-            <label for="hcf_area">Surface Area</label>
-            <input id="hcf_area" type="text" name="hcf_area" value="<?= $area; ?>">
-        </p>
-        <p class="meta-options hcf_field">
-            <label for="hcf_bedrooms">Nombre de chambres</label>
-            <input id="hcf_bedrooms" type="number" name="hcf_bedrooms" value="<?= $bedrooms; ?>">
-        </p>
-        <p class="meta-options hcf_field">
-            <label for="hcf_rooms">Nombre de pièces</label>
-            <input id="hcf_rooms" type="number" name="hcf_rooms" value="<?= $rooms; ?>">
-        </p>
-    </div>
-    <?
-}
-
-
 /*
  * ADJUST DISPLAY FOR USERS
 */
 if ( in_array( 'subscriber', (array) wp_get_current_user()->roles ) ) {
     add_filter( 'show_admin_bar', '__return_false' );
 }
+
 
 // add_action('pre_get_posts', 'giga_homepage_query');
 // function giga_homepage_query($query)

@@ -10,7 +10,7 @@
 abstract class WP_Privacy_Requests_Table extends WP_List_Table {
 
 	/**
-	 * Action name for the requests this table will work with. Classes
+	 * Action name for the requests this table will work with. classes
 	 * which inherit from WP_Privacy_Requests_Table should define this.
 	 *
 	 * Example: 'export_personal_data'.

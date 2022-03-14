@@ -12,7 +12,7 @@
  *
  * @since Twenty Twenty-One 1.0
  *
- * @param array $classes Classes for the body element.
+ * @param array $classes classes for the body element.
  * @return array
  */
 function twenty_twenty_one_body_classes( $classes ) {

@@ -12227,8 +12227,8 @@ msgid "In a few words, explain what this site is about."
 msgstr "En quelques mots, décrivez la raison d’être de ce site."
 
 #: wp-admin/includes/class-walker-nav-menu-edit.php:221
-msgid "CSS Classes (optional)"
-msgstr "Classes CSS (facultatives)"
+msgid "CSS classes (optional)"
+msgstr "classes CSS (facultatives)"
 
 #: wp-admin/includes/nav-menu.php:1114
 msgid "Link Target"

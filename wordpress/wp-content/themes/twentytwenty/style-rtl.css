@@ -28,7 +28,7 @@ with others.
 	0. 	CSS Reset
 	1. 	Document Setup
 	2. 	Element Base
-	3. 	Helper Classes
+	3. 	Helper classes
 	4. 	Site Header
 	5. 	Menu Modal
 	6. 	Search Modal
@@ -941,7 +941,7 @@ th {
 
 /* -------------------------------------------------------------------------- */
 
-/*	3. Helper Classes
+/*	3. Helper classes
 /* -------------------------------------------------------------------------- */
 
 
@@ -1217,7 +1217,7 @@ button.toggle {
 }
 
 
-/* Image Classes ----------------------------- */
+/* Image classes ----------------------------- */
 
 .bg-image {
 	background-position: center;
@@ -2773,7 +2773,7 @@ h2.entry-title {
 }
 
 
-/* Block Typography Classes ------------------ */
+/* Block Typography classes ------------------ */
 
 .has-text-align-left {
 	text-align: left;
@@ -3563,7 +3563,7 @@ figure.wp-block-table.is-style-stripes {
 }
 
 
-/* Alignment Classes ------------------------- */
+/* Alignment classes ------------------------- */
 
 .entry-content > *:not(.alignwide):not(.alignfull):not(.alignleft):not(.alignright):not(.is-style-wide) {
 	max-width: 58rem;
@@ -4834,7 +4834,7 @@ a.to-the-top > * {
 	}
 
 
-	/* Helper Classes ------------------------- */
+	/* Helper classes ------------------------- */
 
 	/* SECTIONS */
 
@@ -5624,7 +5624,7 @@ a.to-the-top > * {
 
 	/* Document Setup ------------------------ */
 
-	/* Helper Classes ------------------------ */
+	/* Helper classes ------------------------ */
 
 	/* Site Header --------------------------- */
 
@@ -6059,7 +6059,7 @@ a.to-the-top > * {
 		font-size: 8.4rem;
 	}
 
-	/* Helper Classes ------------------------ */
+	/* Helper classes ------------------------ */
 
 	/* Site Header --------------------------- */
 

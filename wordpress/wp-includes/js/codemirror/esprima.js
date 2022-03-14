@@ -5081,7 +5081,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    NoCatchOrFinally: 'Missing catch or finally after try',
 	    ParameterAfterRestParameter: 'Rest parameter must be last formal parameter',
 	    Redeclaration: '%0 \'%1\' has already been declared',
-	    StaticPrototype: 'Classes may not have static property named prototype',
+	    StaticPrototype: 'classes may not have static property named prototype',
 	    StrictCatchVariable: 'Catch variable may not be eval or arguments in strict mode',
 	    StrictDelete: 'Delete of an unqualified identifier in strict mode.',
 	    StrictFunction: 'In strict mode code, functions can only be declared at top level or inside a block',

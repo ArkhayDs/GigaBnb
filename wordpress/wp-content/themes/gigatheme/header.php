@@ -9,22 +9,19 @@
 </head>
 <body>
 <header>
-    <a onmouseenter="playshootingstars()" class="header_side_button_container" href="#"><?= wp_nav_menu([
-            'theme_location' => 'header',
-            'container' => false,
-            'menu_class' => "header_side_button_container"
-        ]);?>
+    <a onmouseenter="playshootingstars()" class="header_side_button_container" href="/vente/">
         <img class="header_side_buttons" src="<?= get_template_directory_uri() ?>/assets/images/Header/vendre_un_bien.png">
     </a>
     <a href="/">
         <img class="header_central_button" src="<?= get_template_directory_uri() ?>/assets/images/Header/header_Albnb.png">
     </a>
-    <a onmouseenter="playshootingstars()" class="header_side_button_container" href="/connexion/">
-        <img class="header_side_buttons" src="<?= get_template_directory_uri() ?>/assets/images/Header/inscription_connexion.png">
-    </a>
-
-    <a href="<?= wp_logout_url(home_url()); ?>">Deconnexion</a>
+    <?php if (!is_user_logged_in()) :?>
+        <a onmouseenter="playshootingstars()" class="header_side_button_container" href="/connexion/">
+            <img class="header_side_buttons" src="<?= get_template_directory_uri() ?>/assets/images/Header/inscription_connexion.png">
+        </a>
+    <?php else :?>
+        <a onmouseenter="playshootingstars()" class="header_side_button_container" href="/compte/">
+            <img class="header_side_buttons" src="<?= get_template_directory_uri() ?>/assets/images/Header/compte-button.png">
+        </a>
+    <?php endif; ?>
 </header>
-                <!--
-
-                --><?php /*get_search_form() */?>

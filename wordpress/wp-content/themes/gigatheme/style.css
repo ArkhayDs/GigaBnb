@@ -9,6 +9,10 @@
     font-family: "Comic Neue", cursive;
 }
 
+body {
+    color: white !important;
+}
+
 html {
     background-image: url("./assets/images/grass-texture.png");
 
@@ -21,6 +25,10 @@ body {
     width: 55%;
     height: auto;
     overflow-x: hidden;
+}
+
+.card {
+    background-color: #2f2f2f !important;
 }
 
 @media screen and (max-width: 1550px) {

@@ -13,7 +13,7 @@
  * Comments
  * Post Meta
  * Menus
- * Classes
+ * classes
  * Archives
  * Miscellaneous
  */
@@ -626,7 +626,7 @@ function twentytwenty_nav_menu_social_icons( $item_output, $item, $depth, $args 
 add_filter( 'walker_nav_menu_start_el', 'twentytwenty_nav_menu_social_icons', 10, 4 );
 
 /**
- * Classes
+ * classes
  */
 
 /**
@@ -651,8 +651,8 @@ add_action( 'wp_head', 'twentytwenty_no_js_class' );
  *
  * @since Twenty Twenty 1.0
  *
- * @param array $classes Classes added to the body tag.
- * @return array Classes added to the body tag.
+ * @param array $classes classes added to the body tag.
+ * @return array classes added to the body tag.
  */
 function twentytwenty_body_classes( $classes ) {
 

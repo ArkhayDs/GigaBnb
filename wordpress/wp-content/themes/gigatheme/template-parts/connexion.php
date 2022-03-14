@@ -21,8 +21,8 @@ get_header()?>
                     <input type="password" placeholder="Entrez le mot de passe" name="pwd" required>
                 </span>
                 <span>
-                    <input type="checkbox" class="form-check-input" id="rememberme" name="rememberme">
-                    <label class="form-check-label" for="rememberme">Ne m'oublie pas. :(</label>
+                    <input type="checkbox" class="checkbox form-check-input" id="rememberme" name="rememberme">
+                    <label class="checkbox-label" for="rememberme">Ne m'oublie pas. :(</label>
                 </span>
 
                 <a class="mdp-oublie" href="https://www.youtube.com/watch?v=OZw9L-PkRKs&ab_channel=HMomentPalli">mot de passe oublié</a>

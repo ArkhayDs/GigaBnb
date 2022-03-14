@@ -12,11 +12,8 @@
 
             <div class="contain_searchbar">
                 <div class="search_container">
-                    <h3> Recherche</h3>
-                    <input type="search" name="Rechercher" placeholder="Recherchez">
+                    <?php get_search_form(); ?>
                 </div>
-                <button type="submit"> Trier </button>
-                <button type="submit"> Reinitialiser</button>
             </div>
         </div>
 
@@ -75,8 +72,7 @@
                                         the_terms(get_the_ID(), 'modalite', ' - ') ?></p>
                                 </div>
                             </div>
-                            <a class="see_more">
-                                <!-- inserer lien vers le bien (détails) -->
+                            <a class="see_more" href="<?= the_permalink(); ?>">
                                 <img src="<?= get_template_directory_uri() ?>/assets/images/Homepage/see_more_button.png" alt="En savoir plus">
                             </a>
                         </div>

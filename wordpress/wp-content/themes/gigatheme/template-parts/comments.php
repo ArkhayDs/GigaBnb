@@ -6,8 +6,10 @@
                 'short_ping'  => true,
             ));
 
-            comment_form();
         ?>
     </ol>
 
-<?php endif ?>
+<?php endif;
+
+comment_form();
+?>

@@ -14,7 +14,7 @@
  *     1: Minimum level or capability required.
  *     2: The URL of the item's file.
  *     3: Page title.
- *     4: Classes.
+ *     4: classes.
  *     5: ID.
  *     6: Icon for top level menu.
  *
